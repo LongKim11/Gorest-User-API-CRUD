@@ -1,0 +1,106 @@
+<div class="container p-3 my-5">
+  <div
+    class="d-flex flex-row align-items-center justify-content-center gap-3 mb-3"
+  >
+    <h1 class="text-primary text-center">Users List</h1>
+    <a href="/add" class="btn btn-primary" style="width: 42; height: 32;"><i
+        class="bi bi-person-plus"
+      ></i></a>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+        <tr>
+          <th scope="row">{{increaseIdx @index}}</th>
+          <td>{{name}}</td>
+          <td>{{email}}</td>
+          <td>{{gender}}</td>
+          <td>{{status}}</td>
+          <td>
+            <div class="d-flex flex-row justify-content-left gap-3">
+              <a href="/details/{{id}}" class="btn btn-success"><i
+                  class="bi bi-info-circle"
+                ></i>
+              </a>
+              <a href="/update/{{id}}" class="btn btn-primary"><i
+                  class="bi bi-pencil"
+                ></i></a>
+              <a href="/delete/{{id}}" class="btn btn-danger"><i
+                  class="bi bi-trash"
+                ></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="/?page={{decreasePage page 1}}&per_page=10"
+        >Previous</a>
+      </li>
+      <li class="page-item"><a
+          class="page-link"
+          href="/?page={{page}}&per_page=10"
+        >{{page}}</a></li>
+      <li class="page-item"><a
+          class="page-link"
+          href="/?page={{increasePage page 1}}&per_page=10"
+        >{{increasePage page 1}}</a></li>
+      <li class="page-item"><a
+          class="page-link"
+          href="/?page={{increasePage page 2}}&per_page=10"
+        >{{increasePage page 2}}</a></li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="/?page={{increasePage page 1}}&per_page=10"
+        >Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+
+{{#if msg}}
+  <div
+    class="toast-container"
+    style="position: absolute; top: 10px; right: 10px;"
+  >
+    <div class="toast show fade text-white bg-success border-0">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{msg}}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          data-bs-dismiss="toast"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let toast = document.querySelector(".toast"); setTimeout(() => {
+    toast.classList.remove("show")}, 3000); let btn =
+    document.querySelector(".btn-close"); btn.addEventListener("click", () => {
+    toast.classList.remove("show")});
+  </script>
+{{/if}}
